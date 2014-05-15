@@ -7,6 +7,7 @@
 //
 
 #import "LDViewController.h"
+#import "LDFactory.h"
 
 @interface LDViewController ()
 
@@ -18,6 +19,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    LDFactory *tileArray = [[LDFactory alloc] init];
+    
 }
 
 - (void)didReceiveMemoryWarning
