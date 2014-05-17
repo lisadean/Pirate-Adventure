@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LDFactory.h"
+#import "LDTile.h"
 
 @interface LDViewController : UIViewController
 
+
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
+
+@property (strong, nonatomic) IBOutlet UILabel *storyLabel;
+@property (strong, nonatomic) IBOutlet UIButton *actionButton;
+
 @property (strong, nonatomic) IBOutlet UILabel *healthLabel;
 @property (strong, nonatomic) IBOutlet UILabel *damageLabel;
 @property (strong, nonatomic) IBOutlet UILabel *weaponLabel;
@@ -20,5 +27,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *eastButton;
 @property (strong, nonatomic) IBOutlet UIButton *southButton;
 @property (strong, nonatomic) IBOutlet UIButton *westButton;
+
+@property (strong, nonatomic) NSArray *tileSet;
+@property (nonatomic) CGPoint currentPoint;
+@property (strong, nonatomic) LDTile *currentTile;
 
 @end

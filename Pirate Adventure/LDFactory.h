@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LDTile.h"
 
 @interface LDFactory : NSObject
--(NSArray *)createTile;
 
-
++(NSArray *)createTileSet;
++(LDTile *)createTileWithStory:(NSString *)story backgroundImage:(NSString *)backgroundImageFile;
 @end

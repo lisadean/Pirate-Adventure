@@ -12,6 +12,5 @@
 
 @property (strong, nonatomic) NSString *story;
 @property (strong, nonatomic) UIImage *backgroundImage;
-@property (nonatomic) CGPoint tileLocation;
 
 @end

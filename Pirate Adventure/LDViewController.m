@@ -7,7 +7,6 @@
 //
 
 #import "LDViewController.h"
-#import "LDFactory.h"
 
 @interface LDViewController ()
 
@@ -19,7 +18,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    LDFactory *tileArray = [[LDFactory alloc] init];
+    
+    self.tileSet = [LDFactory createTileSet];
+    
+    self.currentPoint = CGPointMake(0, 0);
+    self.currentTile = [[self.tileSet objectAtIndex:self.currentPoint.x] objectAtIndex:self.currentPoint.y];
+    self.backgroundImage.image = self.currentTile.backgroundImage;
+    self.storyLabel.text = self.currentTile.story;
+
     
 }
 
