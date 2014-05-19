@@ -7,37 +7,72 @@
 //
 
 #import "LDFactory.h"
+#import "LDArmor.h"
+#import "LDWeapon.h"
 
 @implementation LDFactory
 
 +(NSArray *)createTileSet
 {
-    LDTile *tile1 = [self createTileWithStory:@"You have arrived at the start of your adventure. Which direction will you go?" backgroundImage:@"PirateStart.jpg"];
-    LDTile *tile2 = [self createTileWithStory:@"Blacksmith" backgroundImage:@"PirateBlacksmith.jpeg"];
-    LDTile *tile3 = [self createTileWithStory:@"Weapons" backgroundImage:@"PirateWeapons.jpeg"];
     
-    LDTile *tile4 = [self createTileWithStory:@"Dock" backgroundImage:@"PirateFriendlyDock.jpg"];
-    LDTile *tile5 = [self createTileWithStory:@"Attack" backgroundImage:@"PirateAttack.jpg"];
-    LDTile *tile6 = [self createTileWithStory:@"Ship Battle" backgroundImage:@"PirateShipBattle.jpeg"];
-    
-    LDTile *tile7 = [self createTileWithStory:@"Octopus" backgroundImage:@"PirateOctopusAttack.jpg"];
-    LDTile *tile8 = [self createTileWithStory:@"Boss" backgroundImage:@"PirateBoss.jpeg"];
-    LDTile *tile9 = [self createTileWithStory:@"Plank" backgroundImage:@"PiratePlank.jpg"];
-    
-    LDTile *tile10 = [self createTileWithStory:@"Treasure!" backgroundImage:@"PirateTreasure.jpeg"];
-    LDTile *tile11 = [self createTileWithStory:@"Parrot" backgroundImage:@"PirateParrot.jpg"];
-    LDTile *tile12 = [self createTileWithStory:@"Treasure" backgroundImage:@"PirateTreasure2.jpeg"];
-    
-    NSArray *columnArray1 = [[NSArray alloc] initWithObjects:tile1, tile2, tile3, nil];
-    NSArray *columnArray2 = [[NSArray alloc] initWithObjects:tile4, tile5, tile6, nil];
-    NSArray *columnArray3 = [[NSArray alloc] initWithObjects:tile7, tile8, tile9, nil];
-    NSArray *columnArray4 = [[NSArray alloc] initWithObjects:tile10, tile11, tile12, nil];
+    return [[NSArray alloc] initWithObjects:
+            
+        [[NSArray alloc] initWithObjects:
+             [self createTileWithStory:@"You have arrived at the start of your adventure. Which direction will you go?" backgroundImage:@"PirateStart.jpg"],
+             [self createTileWithStory:@"Blacksmith" backgroundImage:@"PirateBlacksmith.jpeg" specialEffect:@"Chest Plate"],
+             [self createTileWithStory:@"Weapons" backgroundImage:@"PirateWeapons.jpeg" specialEffect:@"Sword"],
+             nil],
+            
+        [[NSArray alloc] initWithObjects:
+            [self createTileWithStory:@"Dock" backgroundImage:@"PirateFriendlyDock.jpg"],
+            [self createTileWithStory:@"Attack" backgroundImage:@"PirateAttack.jpg"],
+            [self createTileWithStory:@"Ship Battle" backgroundImage:@"PirateShipBattle.jpeg"],
+            nil],
+            
+        [[NSArray alloc] initWithObjects:
+            [self createTileWithStory:@"Octopus" backgroundImage:@"PirateOctopusAttack.jpg"],
+            [self createTileWithStory:@"Boss" backgroundImage:@"PirateBoss.jpeg"],
+            [self createTileWithStory:@"Plank" backgroundImage:@"PiratePlank.jpg"],
+            nil],
+            
+        [[NSArray alloc] initWithObjects:
+            [self createTileWithStory:@"Treasure!" backgroundImage:@"PirateTreasure.jpeg"],
+            [self createTileWithStory:@"Parrot" backgroundImage:@"PirateParrot.jpg"],
+            [self createTileWithStory:@"Treasure" backgroundImage:@"PirateTreasurer2.jpeg"],
+            nil],
+            
+        nil];
 
-    
-    NSArray *tileArray = [[NSArray alloc] initWithObjects:columnArray1, columnArray2, columnArray3, columnArray4, nil];
-
-    return tileArray;
 }
+
++(LDTile *)createTileWithStory:(NSString *)story backgroundImage:(NSString *)backgroundImageFile specialEffect:(NSString *)effect
+{
+    LDTile *tile = [self createTileWithStory:story backgroundImage:backgroundImageFile];
+    NSArray *options = @[@"Sword", @"Chest Plate", @"damage", @"health"];
+    int option = [options indexOfObject:effect];
+    switch (option) {
+        case 0:
+            //sword
+            tile.weapon = [self createWeaponWithName:[options objectAtIndex:option] damage:40];
+            tile.actionButtonTitle = @"Pick up weapon";
+            break;
+        case 1:
+            //chestplate
+            tile.armor = [self createArmorWithName:[options objectAtIndex:option] health:30];
+            tile.actionButtonTitle = @"Pick up armor";
+            break;
+        case 2:
+            //damage
+            break;
+        case 3:
+            //health
+            break;
+        default:
+            break;
+    }
+    return tile;
+}
+
 
 +(LDTile *)createTileWithStory:(NSString *)story backgroundImage:(NSString *)backgroundImageFile
 {
@@ -47,5 +82,28 @@
     return tile;
 }
 
++(LDCharacter *)createCharacter
+{
+    LDCharacter *character = [[LDCharacter alloc] init];
+    character.health = 100;
+    character.damage = 10;
+    return character;
+}
+
++(LDWeapon *)createWeaponWithName:(NSString *)name damage:(int)damage
+{
+    LDWeapon *weapon = [[LDWeapon alloc] init];
+    weapon.name = name;
+    weapon.damage = damage;
+    return weapon;
+}
+
++(LDArmor *)createArmorWithName:(NSString *)name health:(int)health
+{
+    LDArmor *armor = [[LDArmor alloc] init];
+    armor.name = name;
+    armor.health = health;
+    return armor;
+}
 
 @end

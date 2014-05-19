@@ -9,9 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "LDFactory.h"
 #import "LDTile.h"
+#import "LDCharacter.h"
 
 @interface LDViewController : UIViewController
 
+- (IBAction)northButtonPressed:(UIButton *)sender;
+- (IBAction)eastButtonPressed:(UIButton *)sender;
+- (IBAction)southButtonPressed:(UIButton *)sender;
+- (IBAction)westButtonPressed:(UIButton *)sender;
 
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
 
@@ -31,5 +36,6 @@
 @property (strong, nonatomic) NSArray *tileSet;
 @property (nonatomic) CGPoint currentPoint;
 @property (strong, nonatomic) LDTile *currentTile;
+@property (strong, nonatomic) LDCharacter *character;
 
 @end
