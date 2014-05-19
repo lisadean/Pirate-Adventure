@@ -18,7 +18,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
+    // test edit from github.com
     // Create tileset and character
     self.tileSet = [LDFactory createTileSet];
     self.character = [LDFactory createCharacter];
