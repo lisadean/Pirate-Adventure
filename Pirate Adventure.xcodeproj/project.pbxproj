@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		424C1F54192B9F49005B9957 /* test in Resources */ = {isa = PBXBuildFile; fileRef = 424C1F53192B9F49005B9957 /* test */; };
+		424C1F57192B9F81005B9957 /* LDTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 424C1F56192B9F81005B9957 /* LDTest.m */; };
 		42C2C3D01925287900A86153 /* LDFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C2C3CF1925287900A86153 /* LDFactory.m */; };
 		42CB125719244A920016B5F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CB125619244A920016B5F9 /* Foundation.framework */; };
 		42CB125919244A920016B5F9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CB125819244A920016B5F9 /* CoreGraphics.framework */; };
@@ -52,6 +54,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		424C1F53192B9F49005B9957 /* test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test; sourceTree = "<group>"; };
+		424C1F55192B9F81005B9957 /* LDTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDTest.h; sourceTree = "<group>"; };
+		424C1F56192B9F81005B9957 /* LDTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDTest.m; sourceTree = "<group>"; };
 		42C2C3CE1925287900A86153 /* LDFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDFactory.h; sourceTree = "<group>"; };
 		42C2C3CF1925287900A86153 /* LDFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDFactory.m; sourceTree = "<group>"; };
 		42CB125319244A920016B5F9 /* Pirate Adventure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pirate Adventure.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +149,8 @@
 				42CB12AB19244EFD0016B5F9 /* LDWeapon.m */,
 				42CB12AD19244F030016B5F9 /* LDBoss.h */,
 				42CB12AE19244F030016B5F9 /* LDBoss.m */,
+				424C1F55192B9F81005B9957 /* LDTest.h */,
+				424C1F56192B9F81005B9957 /* LDTest.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -186,6 +193,7 @@
 				42CB126819244A920016B5F9 /* Main.storyboard */,
 				42CB126B19244A920016B5F9 /* LDViewController.h */,
 				42CB126C19244A920016B5F9 /* LDViewController.m */,
+				424C1F53192B9F49005B9957 /* test */,
 				42C2C3CD1925284600A86153 /* Model */,
 				42CB126E19244A920016B5F9 /* Images.xcassets */,
 				42CB125D19244A920016B5F9 /* Supporting Files */,
@@ -322,6 +330,7 @@
 				42CB12A619244EE50016B5F9 /* PirateWeapons.jpeg in Resources */,
 				42CB12A119244EE50016B5F9 /* PiratePlank.jpg in Resources */,
 				42CB12A419244EE50016B5F9 /* PirateTreasure.jpeg in Resources */,
+				424C1F54192B9F49005B9957 /* test in Resources */,
 				42CB129E19244EE50016B5F9 /* PirateFriendlyDock.jpg in Resources */,
 				42CB129B19244EE50016B5F9 /* PirateAttack.jpg in Resources */,
 				42CB126F19244A920016B5F9 /* Images.xcassets in Resources */,
@@ -360,6 +369,7 @@
 				42CB12B219244F0F0016B5F9 /* LDCharacter.m in Sources */,
 				42CB126D19244A920016B5F9 /* LDViewController.m in Sources */,
 				42CB12AC19244EFD0016B5F9 /* LDWeapon.m in Sources */,
+				424C1F57192B9F81005B9957 /* LDTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
