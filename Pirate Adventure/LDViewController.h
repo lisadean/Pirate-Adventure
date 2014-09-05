@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "LDFactory.h"
-#import "LDTile.h"
 #import "LDCharacter.h"
 
 @interface LDViewController : UIViewController
@@ -36,7 +35,6 @@
 
 @property (strong, nonatomic) NSArray *tileSet;
 @property (nonatomic) CGPoint currentPoint;
-@property (strong, nonatomic) LDTile *currentTile;
 @property (strong, nonatomic) LDCharacter *character;
 
 @end

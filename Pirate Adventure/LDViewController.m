@@ -7,6 +7,7 @@
 //
 
 #import "LDViewController.h"
+#import "LDTile.h"
 
 @interface LDViewController ()
 
@@ -24,36 +25,10 @@
     self.tileSet = [factory createTileSet];
     self.character = [factory createCharacter:100 damage:10];
     
-    // Set button colors
-    //self.northButton.backgroundColor = [UIColor blackColor];
-    //self.eastButton.backgroundColor = [UIColor blackColor];
-    //self.southButton.backgroundColor = [UIColor blackColor];
-    //self.westButton.backgroundColor = [UIColor blackColor];
-    
     // Set current point and load tile
     self.currentPoint = CGPointMake(0, 0);
-    [self loadNewTile:self.currentPoint];
-    
-    // Load character info
-    self.healthLabel.text = [NSString stringWithFormat:@"%i",self.character.health];
-    self.damageLabel.text = [NSString stringWithFormat:@"%i", self.character.damage];
-    if (self.character.weapon)
-    {
-        self.weaponLabel.text = self.character.weapon.name;
-    }
-    else
-    {
-        self.weaponLabel.text = @"None";
-    }
-    if (self.character.armor)
-    {
-        self.armorLabel.text = self.character.armor.name;
-    }
-    else
-    {
-        self.armorLabel.text = @"None";
-    }
-    
+    [self updateTile:self.currentPoint];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,20 +37,22 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)loadNewTile:(CGPoint)tilePoint
+-(void)updateTile:(CGPoint)tilePoint
 {
     self.currentPoint = tilePoint;
-    self.currentTile = [[self.tileSet objectAtIndex:tilePoint.x] objectAtIndex:tilePoint.y];
     
-    self.backgroundImage.image = self.currentTile.backgroundImage;
-    self.storyLabel.text = self.currentTile.story;
-    if (self.currentTile.actionButtonTitle) {
-        [self.actionButton setTitle:self.currentTile.actionButtonTitle forState:UIControlStateNormal];
-    }
-    else
-    {
-        [self.actionButton setTitle:@"No action" forState:UIControlStateNormal];
-    }
+    LDTile *currentTile = [[LDTile alloc] init];
+    currentTile = [[self.tileSet objectAtIndex:tilePoint.x] objectAtIndex:tilePoint.y];
+    
+    self.backgroundImage.image = currentTile.backgroundImage;
+    self.storyLabel.text = currentTile.story;
+    
+    [self.actionButton setTitle:currentTile.actionButtonTitle forState:UIControlStateNormal];
+    
+    self.healthLabel.text = [NSString stringWithFormat:@"%i",self.character.health];
+    self.damageLabel.text = [NSString stringWithFormat:@"%i", self.character.damage];
+    self.weaponLabel.text = self.character.weapon.name;
+    self.armorLabel.text = self.character.armor.name;    
     
     self.northButton.hidden = tilePoint.y >= [[self.tileSet objectAtIndex:tilePoint.x] count] - 1;
     self.eastButton.hidden = tilePoint.x >= [self.tileSet count] - 1;
@@ -102,7 +79,7 @@
     CGPoint newPoint = CGPointMake(self.currentPoint.x, (self.currentPoint.y + 1));
     if ([self tileValid:newPoint])
     {
-        [self loadNewTile:newPoint];
+        [self updateTile:newPoint];
     }
 }
 
@@ -112,7 +89,7 @@
     CGPoint newPoint = CGPointMake(self.currentPoint.x + 1, self.currentPoint.y);
     if ([self tileValid:newPoint])
     {
-        [self loadNewTile:newPoint];
+        [self updateTile:newPoint];
     }
 
 }
@@ -123,7 +100,7 @@
     CGPoint newPoint = CGPointMake(self.currentPoint.x, self.currentPoint.y - 1);
     if ([self tileValid:newPoint])
     {
-        [self loadNewTile:newPoint];
+        [self updateTile:newPoint];
     }
 }
 
@@ -133,11 +110,15 @@
     CGPoint newPoint = CGPointMake(self.currentPoint.x - 1, self.currentPoint.y);
     if ([self tileValid:newPoint])
     {
-        [self loadNewTile:newPoint];
+        [self updateTile:newPoint];
     }
 }
 
 - (IBAction)actionButtonPressed:(UIButton *)sender {
+    
+    
+    
+    [self updateTile:self.currentPoint];
 }
 
 @end
