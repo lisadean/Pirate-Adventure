@@ -17,6 +17,7 @@
 - (IBAction)eastButtonPressed:(UIButton *)sender;
 - (IBAction)southButtonPressed:(UIButton *)sender;
 - (IBAction)westButtonPressed:(UIButton *)sender;
+- (IBAction)actionButtonPressed:(UIButton *)sender;
 
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
 

@@ -20,8 +20,9 @@
 	// Do any additional setup after loading the view, typically from a nib.
 
     // Create tileset and character
-    self.tileSet = [LDFactory createTileSet];
-    self.character = [LDFactory createCharacter];
+    LDFactory *factory = [[LDFactory alloc] init];
+    self.tileSet = [factory createTileSet];
+    self.character = [factory createCharacter:100 damage:10];
     
     // Set button colors
     //self.northButton.backgroundColor = [UIColor blackColor];
@@ -85,16 +86,9 @@
 -(BOOL)tileValid:(CGPoint)tilePoint
 {
     NSLog(@"tilePoint %f,%f", tilePoint.x, tilePoint.y);
-    if ((tilePoint.x >= 0) && (tilePoint.x < [self.tileSet count]))
+    if ((tilePoint.x >= 0) && (tilePoint.x < [self.tileSet count]) && (tilePoint.y >= 0) && (tilePoint.y < [[self.tileSet objectAtIndex:tilePoint.x] count]))
     {
-        if ((tilePoint.y >= 0) && (tilePoint.y < [[self.tileSet objectAtIndex:tilePoint.x] count]))
-        {
-            return YES;
-        }
-        else
-        {
-            return NO;
-        }
+        return YES;
     }
     else
     {
@@ -141,6 +135,9 @@
     {
         [self loadNewTile:newPoint];
     }
+}
+
+- (IBAction)actionButtonPressed:(UIButton *)sender {
 }
 
 @end

@@ -9,17 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "LDTile.h"
 #import "LDCharacter.h"
-#import "LDWeapon.h"
-#import "LDArmor.h"
 
 @interface LDFactory : NSObject
 
-+(NSArray *)createTileSet;
+-(NSArray *)createTileSet;
 
-+(LDTile *)createTileWithStory:(NSString *)story backgroundImage:(NSString *)backgroundImageFile;
-+(LDTile *)createTileWithStory:(NSString *)story backgroundImage:(NSString *)backgroundImageFile specialEffect:(NSString *)effect;
+-(LDCharacter *)createCharacter:(int)health damage:(int)damage;
 
-+(LDCharacter *)createCharacter;
-+(LDWeapon *)createWeaponWithName:(NSString *)name damage:(int)damage;
-+(LDArmor *)createArmorWithName:(NSString *)name health:(int)health;
 @end

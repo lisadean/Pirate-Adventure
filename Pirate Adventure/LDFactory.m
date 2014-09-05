@@ -7,94 +7,66 @@
 //
 
 #import "LDFactory.h"
-#import "LDArmor.h"
-#import "LDWeapon.h"
 
 @implementation LDFactory
 
-+(NSArray *)createTileSet
+-(NSArray *)createTileSet
 {
-    
-    return [[NSArray alloc] initWithObjects:
+
+    NSArray *tiles = [[NSArray alloc] initWithObjects:
             
         [[NSArray alloc] initWithObjects:
-             [self createTileWithStory:@"You have arrived at the start of your adventure. Which direction will you go?" backgroundImage:@"PirateStart.jpg"],
-             [self createTileWithStory:@"Blacksmith" backgroundImage:@"PirateBlacksmith.jpeg" specialEffect:@"chestPlate"],
-             [self createTileWithStory:@"Weapons" backgroundImage:@"PirateWeapons.jpeg" specialEffect:@"sword"],
+             [self createTile:@"You have arrived at the start of your adventure. Which direction will you go?" backgroundImage:@"PirateStart.jpg" actionButtonTitle:0 healthEffect:0 armor:nil weapon:nil],
+             [self createTile:@"Blacksmith" backgroundImage:@"PirateBlacksmith.jpeg" actionButtonTitle:@"Pick up chest plate" healthEffect:0 armor:nil weapon:nil],
+             [self createTile:@"Weapons" backgroundImage:@"PirateWeapons.jpeg" actionButtonTitle:@"Pick up sword" healthEffect:0 armor:nil weapon:[self createWeapon:@"Blunt sword" damage:20]],
              nil],
             
         [[NSArray alloc] initWithObjects:
-            [self createTileWithStory:@"Dock" backgroundImage:@"PirateFriendlyDock.jpg"],
-            [self createTileWithStory:@"Attack" backgroundImage:@"PirateAttack.jpg" specialEffect:@"pirateAttack"],
-            [self createTileWithStory:@"Ship Battle" backgroundImage:@"PirateShipBattle.jpeg"],
+            [self createTile:@"Dock" backgroundImage:@"PirateFriendlyDock.jpg" actionButtonTitle:@"" healthEffect:0 armor:nil weapon:nil],
+            [self createTile:@"Attack" backgroundImage:@"PirateAttack.jpg" actionButtonTitle:@"Fight back against pirates" healthEffect:-40 armor:nil weapon:nil],
+            [self createTile:@"Ship Battle" backgroundImage:@"PirateShipBattle.jpeg" actionButtonTitle:@"" healthEffect:0 armor:nil weapon:nil],
             nil],
             
         [[NSArray alloc] initWithObjects:
-            [self createTileWithStory:@"Octopus" backgroundImage:@"PirateOctopusAttack.jpg"],
-            [self createTileWithStory:@"Boss" backgroundImage:@"PirateBoss.jpeg"],
-            [self createTileWithStory:@"Plank" backgroundImage:@"PiratePlank.jpg"],
+            [self createTile:@"Octopus" backgroundImage:@"PirateOctopusAttack.jpg" actionButtonTitle:@"" healthEffect:0 armor:nil weapon:nil],
+            [self createTile:@"Boss" backgroundImage:@"PirateBoss.jpeg" actionButtonTitle:@"" healthEffect:0 armor:nil weapon:nil],
+            [self createTile:@"Plank" backgroundImage:@"PiratePlank.jpg" actionButtonTitle:@"" healthEffect:0 armor:nil weapon:nil],
             nil],
             
         [[NSArray alloc] initWithObjects:
-            [self createTileWithStory:@"Treasure!" backgroundImage:@"PirateTreasure.jpeg"],
-            [self createTileWithStory:@"Parrot" backgroundImage:@"PirateParrot.jpg" specialEffect:@"magicParrot"],
-            [self createTileWithStory:@"Treasure" backgroundImage:@"PirateTreasurer2.jpeg"],
+            [self createTile:@"Treasure!" backgroundImage:@"PirateTreasure.jpeg" actionButtonTitle:@"" healthEffect:0 armor:nil weapon:nil],
+         [self createTile:@"Parrot" backgroundImage:@"PirateParrot.jpg" actionButtonTitle:@"Give Polly a cracker" healthEffect:0 armor:[self createArmor:@"Lucky Parrot" health:50] weapon:nil],
+            [self createTile:@"Treasure" backgroundImage:@"PirateTreasurer2.jpeg" actionButtonTitle:@"" healthEffect:0 armor:nil weapon:nil],
             nil],
             
         nil];
+    
+    return tiles;
 
 }
 
-+(LDTile *)createTileWithStory:(NSString *)story backgroundImage:(NSString *)backgroundImageFile specialEffect:(NSString *)effect
-{
-    LDTile *tile = [self createTileWithStory:story backgroundImage:backgroundImageFile];
-    NSArray *options = @[@"sword", @"chestPlate", @"pirateAttack", @"magicParrot"];
-    int option = [options indexOfObject:effect];
-    switch (option) {
-        case 0:
-            //sword
-            tile.weapon = [self createWeaponWithName:[options objectAtIndex:option] damage:40];
-            tile.actionButtonTitle = @"Pick up sword";
-            break;
-        case 1:
-            //chestplate
-            tile.armor = [self createArmorWithName:[options objectAtIndex:option] health:30];
-            tile.actionButtonTitle = @"Pick up chest plate";
-            break;
-        case 2:
-            //damage from pirate attack
-            tile.healthEffect = -40;
-            tile.actionButtonTitle = @"Fight back against pirates";
-            break;
-        case 3:
-            //health from magic parrot
-            tile.healthEffect = 100;
-            tile.actionButtonTitle = @"Give Polly a cracker";
-            break;
-        default:
-            break;
-    }
-    return tile;
-}
-
-
-+(LDTile *)createTileWithStory:(NSString *)story backgroundImage:(NSString *)backgroundImageFile
+-(LDTile *)createTile:(NSString *)story backgroundImage:(NSString *)backgroundImageFile actionButtonTitle:(NSString *)actionButtonTitleText healthEffect:(int)amount armor:(LDArmor *)armorObject weapon:(LDWeapon *)weaponObject
 {
     LDTile *tile = [[LDTile alloc] init];
     tile.story = story;
     tile.backgroundImage = [UIImage imageNamed:backgroundImageFile];
+    tile.actionButtonTitle = actionButtonTitleText;
+    tile.healthEffect = amount;
+    tile.armor = armorObject;
+    tile.weapon = weaponObject;
+    
     return tile;
 }
 
-+(LDCharacter *)createCharacter
+-(LDCharacter *)createCharacter:(int)health damage:(int)damage
 {
     LDCharacter *character = [[LDCharacter alloc] init];
-    character.health = 100;
-    character.damage = 10;
+    character.health = health;
+    character.damage = damage;
     return character;
 }
 
-+(LDWeapon *)createWeaponWithName:(NSString *)name damage:(int)damage
+-(LDWeapon *)createWeapon:(NSString *)name damage:(int)damage
 {
     LDWeapon *weapon = [[LDWeapon alloc] init];
     weapon.name = name;
@@ -102,7 +74,7 @@
     return weapon;
 }
 
-+(LDArmor *)createArmorWithName:(NSString *)name health:(int)health
+-(LDArmor *)createArmor:(NSString *)name health:(int)health
 {
     LDArmor *armor = [[LDArmor alloc] init];
     armor.name = name;
