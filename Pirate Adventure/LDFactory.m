@@ -20,7 +20,7 @@
          
              [self createTile:@"You visit the local blacksmith. There is iron armor here." backgroundImage:@"PirateBlacksmith.jpeg" actionButtonTitle:@"Pick up iron armor" healthEffect:0 armor:[self createArmor:@"Iron armor" health:30] weapon:nil],
          
-             [self createTile:@"You happen upon a weapons hold. There is a blunt sword here." backgroundImage:@"PirateWeapons.jpeg" actionButtonTitle:@"Pick up sword" healthEffect:0 armor:nil weapon:[self createWeapon:@"Blunt sword" damage:20]],
+             [self createTile:@"You happen upon a weapons hold. There is a blunt sword here." backgroundImage:@"PirateWeapons.jpeg" actionButtonTitle:@"Pick up sword" healthEffect:0 armor:nil weapon:[self createWeapon:@"Blunt sword" damage:40]],
          
              nil],
             
@@ -70,13 +70,15 @@
     return tile;
 }
 
--(LDCharacter *)createCharacter:(int)health damage:(int)damage
+-(LDCharacter *)createCharacter
 {
     LDCharacter *character = [[LDCharacter alloc] init];
-    character.health = health;
-    character.damage = damage;
+    character.health = 100;
+    character.damage = 10;
     character.weapon = [self createWeapon:@"Fists" damage:10];
     character.armor = [self createArmor:@"Tunic" health:10];
+    character.health += character.armor.health;
+    character.damage += character.weapon.damage;
     return character;
 }
 
@@ -94,6 +96,14 @@
     armor.name = name;
     armor.health = health;
     return armor;
+}
+
+-(LDBoss *)createBoss
+{
+    LDBoss *boss = [[LDBoss alloc] init];
+    boss.health = 100;
+    boss.damage = 20;
+    return boss;
 }
 
 @end

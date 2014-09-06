@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "LDTile.h"
 #import "LDCharacter.h"
+#import "LDBoss.h"
 
 @interface LDFactory : NSObject
 
 -(NSArray *)createTileSet;
 
--(LDCharacter *)createCharacter:(int)health damage:(int)damage;
+-(LDCharacter *)createCharacter;
+-(LDBoss *)createBoss;
 
 @end
