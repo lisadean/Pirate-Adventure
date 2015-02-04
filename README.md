@@ -3,7 +3,7 @@ Pirate-Adventure
 
 Pirate Adventure game from iOS 7 course on Udemy
 
-Pirate Adventure assignment
+Pirate Adventure assignment description below ===============================================================================
 
 Objective:
 
